@@ -1,93 +1,61 @@
 import 'dart:async';
 import 'dart:collection';
 
-import 'package:fabrics/1/test/models/fabric_type.dart';
+import 'package:fabrics/2/models/stain_remover.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:flutter/material.dart';
 
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
-import 'package:fabrics/1/test/models/fabric.dart';
+import 'package:fabrics/2/models/stain.dart';
 
-class Test extends HookConsumerWidget {
-  const Test({Key? key}) : super(key: key);
+class Test2 extends HookConsumerWidget {
+  const Test2({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final Fabric fabric = ref.watch(testProvider);
+    final Stain fabric = ref.watch(testProvider);
     final ThemeData theme = Theme.of(context);
 
     useEffect(() {
       ref.read(testProvider.notifier).registerCallback(() {
-        Navigator.pushNamed(context, "/1/results/");
+        Navigator.pushNamed(context, "/2/results/");
       });
     }, []);
 
+    const double verticalDistance = 30;
+
     return Scaffold(
-      body: Column(
+      body: Stack(
+        fit: StackFit.passthrough,
         children: [
-          Expanded(
-            child: SizedBox.expand(
-              child: ColoredBox(
-                color: Colors.white,
-                child: Row(
-                  crossAxisAlignment: CrossAxisAlignment.stretch,
-                  children: [
-                    const Spacer(flex: 4),
-                    Expanded(
-                      flex: 3,
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.stretch,
-                        children: [
-                          const Spacer(flex: 7),
-                          Expanded(
-                            flex: 10,
-                            child: Option(fabric: fabric),
-                          ),
-                          Expanded(
-                            flex: 4,
-                            child: Center(
-                                child: Text(
-                                    "Drag the fibre to the correct box.",
-                                    style: TextStyle(
-                                        fontSize: 20,
-                                        color: theme.scaffoldBackgroundColor,
-                                        fontStyle: FontStyle.italic))),
-                          ),
-                          const Spacer(flex: 6),
-                        ],
-                      ),
-                    ),
-                    const Spacer(flex: 4),
-                  ],
-                ),
-              ),
-            ),
-          ),
-          Expanded(
-            child: Column(
-              children: [
-                const Spacer(),
-                Expanded(
-                  flex: 3,
-                  child: Row(
-                    crossAxisAlignment: CrossAxisAlignment.stretch,
-                    children: [
-                      const Spacer(),
-                      for (FabricType type in FabricType.values) ...[
-                        Expanded(
-                          flex: 7,
-                          child: Choice(type: type),
-                        ),
-                        const Spacer(),
-                      ],
-                    ],
-                  ),
-                ),
-                const Spacer(),
-              ],
-            ),
-          ),
+          Center(child: Option(fabric: fabric)),
+          const Positioned(
+              top: verticalDistance,
+              left: 300,
+              child: Choice(type: StainRemover.sponging)),
+          const Align(
+              alignment: Alignment.centerLeft,
+              child: Padding(
+                  padding: EdgeInsets.only(left: 100),
+                  child: Choice(type: StainRemover.brushing))),
+          const Positioned(
+              bottom: verticalDistance,
+              left: 300,
+              child: Choice(type: StainRemover.preSoaking)),
+          const Positioned(
+              top: verticalDistance,
+              right: 300,
+              child: Choice(type: StainRemover.flushing)),
+          const Align(
+              alignment: Alignment.centerRight,
+              child: Padding(
+                  padding: EdgeInsets.only(right: 100),
+                  child: Choice(type: StainRemover.spatula))),
+          const Positioned(
+              bottom: verticalDistance,
+              right: 300,
+              child: Choice(type: StainRemover.freezing)),
         ],
       ),
     );
@@ -95,7 +63,7 @@ class Test extends HookConsumerWidget {
 }
 
 class Choice extends HookConsumerWidget {
-  final FabricType type;
+  final StainRemover type;
 
   const Choice({required this.type, Key? key}) : super(key: key);
 
@@ -108,8 +76,8 @@ class Choice extends HookConsumerWidget {
 
     final ValueNotifier<bool?> correct = useState(null);
 
-    return DragTarget<Fabric>(
-      onAccept: (Fabric fabric) {
+    return DragTarget<Stain>(
+      onAccept: (Stain fabric) {
         if (ref.read(nextRequestProvider.notifier).state != null) return;
 
         correct.value = ref.read(testProvider.notifier).isCorrect(type);
@@ -123,6 +91,8 @@ class Choice extends HookConsumerWidget {
         });
       },
       builder: (_, __, ___) => SizedBox(
+        width: 250,
+        height: 250,
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
@@ -133,24 +103,30 @@ class Choice extends HookConsumerWidget {
                 clipBehavior: Clip.none,
                 children: [
                   Positioned.fill(
-                    child: ColoredBox(
-                      color: Colors.transparent.withAlpha(
-                        (255 * 0.2).toInt(),
+                    child: Container(
+                      clipBehavior: Clip.hardEdge,
+                      decoration: const BoxDecoration(
+                        shape: BoxShape.circle,
                       ),
-                      child: Icon(
-                        type.icon,
-                        color: Colors.white,
-                        size: 85,
+                      child: ColoredBox(
+                        color: Colors.transparent.withAlpha(
+                          (255 * 0.2).toInt(),
+                        ),
+                        child: Icon(
+                          type.icon,
+                          color: Colors.white,
+                          size: 85,
+                        ),
                       ),
                     ),
                   ),
                   if (correct.value != null)
                     Positioned(
-                      top: -42.5,
-                      right: -42.5,
+                      top: -1,
+                      right: -1,
                       child: Container(
-                        width: 100.0,
-                        height: 100.0,
+                        width: 75,
+                        height: 65,
                         decoration: BoxDecoration(
                           shape: BoxShape.circle,
                           color: const Color(0xff00779a),
@@ -164,7 +140,7 @@ class Choice extends HookConsumerWidget {
                               ? Icons.check_outlined
                               : Icons.close_outlined,
                           color: Colors.white,
-                          size: 85,
+                          size: 58,
                         ),
                       ),
                     )
@@ -174,7 +150,7 @@ class Choice extends HookConsumerWidget {
             Expanded(
               child: Center(
                 child: Text(
-                  type.toStringValue(),
+                  type.value,
                   style: headline,
                   textAlign: TextAlign.center,
                 ),
@@ -188,7 +164,7 @@ class Choice extends HookConsumerWidget {
 }
 
 class Option extends StatelessWidget {
-  final Fabric fabric;
+  final Stain fabric;
 
   const Option({required this.fabric, Key? key}) : super(key: key);
 
@@ -198,15 +174,24 @@ class Option extends StatelessWidget {
     final TextTheme textTheme = theme.textTheme;
     final TextStyle headline = textTheme.headline4!;
 
-    final Widget child = ColoredBox(
-      color: Colors.grey[300]!,
+    final Widget child = Container(
+      width: 200,
+      height: 200,
+      clipBehavior: Clip.hardEdge,
+      decoration: const BoxDecoration(
+        shape: BoxShape.circle,
+        color: Color(0xff00779a),
+      ),
       child: Center(
-        child: Text(fabric.toStringValue(), style: headline),
+        child: Text(
+          fabric.value,
+          style: headline.copyWith(color: Colors.white),
+        ),
       ),
     );
 
     return LayoutBuilder(builder: (_, BoxConstraints constraints) {
-      return Draggable<Fabric>(
+      return Draggable<Stain>(
         data: fabric,
         childWhenDragging: const SizedBox(),
         feedback: ConstrainedBox(constraints: constraints, child: child),
@@ -216,15 +201,15 @@ class Option extends StatelessWidget {
   }
 }
 
-class TestProvider extends StateNotifier<Fabric> {
+class TestProvider extends StateNotifier<Stain> {
   final Queue<void Function()> _callbacks = Queue<void Function()>();
   int _score = 0;
   int _fabricIndex = 0;
 
-  TestProvider() : super(Fabric.values[0]);
+  TestProvider() : super(Stain.values[0]);
 
   int get rank {
-    final int maxScore = Fabric.values.length;
+    final int maxScore = Stain.values.length;
     final int almostScore = maxScore - 1;
 
     return (_score >= maxScore)
@@ -245,8 +230,8 @@ class TestProvider extends StateNotifier<Fabric> {
     }
   }
 
-  bool isCorrect(FabricType type) {
-    bool correct = state.type == type;
+  bool isCorrect(StainRemover type) {
+    bool correct = state.remover == type;
     _score += (correct) ? 1 : 0;
     return correct;
   }
@@ -254,7 +239,7 @@ class TestProvider extends StateNotifier<Fabric> {
   void next() {
     int next = ++_fabricIndex;
 
-    List<Fabric> fabrics = Fabric.values;
+    List<Stain> fabrics = Stain.values;
 
     if (next >= fabrics.length) {
       doneCallback();
@@ -265,7 +250,7 @@ class TestProvider extends StateNotifier<Fabric> {
   }
 }
 
-final testProvider = StateNotifierProvider<TestProvider, Fabric>((_) {
+final testProvider = StateNotifierProvider<TestProvider, Stain>((_) {
   return TestProvider();
 });
 
@@ -273,15 +258,21 @@ final nextRequestProvider = StateProvider<Timer?>((_) {
   return null;
 });
 
-extension on FabricType {
+extension on StainRemover {
   IconData get icon {
     switch (this) {
-      case FabricType.natural:
-        return Icons.eco_outlined;
-      case FabricType.manMade:
-        return Icons.memory_outlined;
-      case FabricType.mineral:
-        return Icons.diamond;
+      case StainRemover.sponging:
+        return Icons.rectangle;
+      case StainRemover.brushing:
+        return Icons.brush_outlined;
+      case StainRemover.preSoaking:
+        return Icons.format_color_fill;
+      case StainRemover.flushing:
+        return Icons.storm_outlined;
+      case StainRemover.spatula:
+        return Icons.cleaning_services;
+      case StainRemover.freezing:
+        return Icons.ac_unit_outlined;
     }
   }
 }

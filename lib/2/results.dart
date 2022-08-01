@@ -1,12 +1,12 @@
-import 'package:fabrics/1/test.dart';
+import 'package:fabrics/2/test.dart';
 import 'package:flutter/material.dart';
 
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
-import 'package:fabrics/1/models/fabric.dart';
+import 'package:fabrics/2/models/stain.dart';
 
-class Results1 extends ConsumerWidget {
-  const Results1({Key? key}) : super(key: key);
+class Results2 extends ConsumerWidget {
+  const Results2({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -129,7 +129,7 @@ class Results1 extends ConsumerWidget {
                             child: Column(
                               crossAxisAlignment: CrossAxisAlignment.stretch,
                               children: [
-                                for (Fabric fabric in Fabric.values) ...[
+                                for (Stain fabric in Stain.values) ...[
                                   const Spacer(),
                                   Expanded(
                                     flex: 3,
@@ -149,7 +149,7 @@ class Results1 extends ConsumerWidget {
                                           child: ColoredBox(
                                             color: const Color(0xffedebe1),
                                             child: Center(
-                                              child: Text(fabric.type.value),
+                                              child: Text(fabric.remover.value),
                                             ),
                                           ),
                                         )

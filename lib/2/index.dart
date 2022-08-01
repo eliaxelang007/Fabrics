@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
-class Intro1 extends StatelessWidget {
-  const Intro1({Key? key}) : super(key: key);
+class Intro2 extends StatelessWidget {
+  const Intro2({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -34,20 +34,20 @@ class Intro1 extends StatelessWidget {
                           flex: 2,
                           child: Align(
                             alignment: Alignment.center,
-                            child: Text("THE WEAKEST WEAVE", style: headline),
+                            child: Text("THE STAIN GAME", style: headline),
                           ),
                         ),
                         Expanded(
-                          flex: 3,
+                          flex: 4,
                           child: Align(
                             alignment: Alignment.center,
                             child: Text.rich(
                               TextSpan(
                                 text: [
-                                  "We've given you a lot of information about the various fabrics, fibres and weaves.",
-                                  "Let's see what you have remembered. Take a look at the following fibres and see if",
-                                  "you can remember where they are sourced from.\n\n",
-                                ].join(' '),
+                                  "Lets put what you've learned to the test!",
+                                  "Take a look at the type of stain you need to remove, and then select the most appropriate removal method.",
+                                  "Make sure you get it right, or you might damage the garment.\n\n",
+                                ].join("\n\n"),
                                 children: [
                                   TextSpan(
                                     text:
@@ -69,7 +69,7 @@ class Intro1 extends StatelessWidget {
                               style:
                                   ElevatedButton.styleFrom(textStyle: button),
                               onPressed: () {
-                                Navigator.pushNamed(context, "/1/test/");
+                                Navigator.pushNamed(context, "/2/test/");
                               },
                               child: const Text("BEGIN"),
                             ),

@@ -1,12 +1,12 @@
-import 'package:fabrics/1/test.dart';
+import 'package:fabrics/3/test.dart';
 import 'package:flutter/material.dart';
 
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
-import 'package:fabrics/1/models/fabric.dart';
+import 'package:fabrics/3/models/fabric.dart';
 
-class Results1 extends ConsumerWidget {
-  const Results1({Key? key}) : super(key: key);
+class Results3 extends ConsumerWidget {
+  const Results3({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -54,9 +54,7 @@ class Results1 extends ConsumerWidget {
                                 ),
                               ),
                               child: Icon(
-                                (rank <= 2)
-                                    ? Icons.check_outlined
-                                    : Icons.close_outlined,
+                                (rank <= 2) ? Icons.check_outlined : Icons.close_outlined,
                                 color: Colors.white,
                                 size: 85,
                               ),
@@ -116,15 +114,13 @@ class Results1 extends ConsumerWidget {
                         Expanded(
                           child: Text(
                             "THE CORRECT ANSWERS WERE:",
-                            style: headline2.copyWith(
-                                color: const Color(0xffa9abae)),
+                            style: headline2.copyWith(color: const Color(0xffa9abae)),
                           ),
                         ),
                         Expanded(
                           flex: 10,
                           child: DefaultTextStyle(
-                            style: const TextStyle(
-                                fontSize: 35, color: Color(0xff363338)),
+                            style: const TextStyle(fontSize: 35, color: Color(0xff363338)),
                             textAlign: TextAlign.center,
                             child: Column(
                               crossAxisAlignment: CrossAxisAlignment.stretch,
@@ -134,8 +130,7 @@ class Results1 extends ConsumerWidget {
                                   Expanded(
                                     flex: 3,
                                     child: Row(
-                                      crossAxisAlignment:
-                                          CrossAxisAlignment.stretch,
+                                      crossAxisAlignment: CrossAxisAlignment.stretch,
                                       children: [
                                         Expanded(
                                           child: ColoredBox(
@@ -149,7 +144,7 @@ class Results1 extends ConsumerWidget {
                                           child: ColoredBox(
                                             color: const Color(0xffedebe1),
                                             child: Center(
-                                              child: Text(fabric.type.value),
+                                              child: Text(fabric.detergents.map((detergent) => detergent.value).join(", ")),
                                             ),
                                           ),
                                         )
