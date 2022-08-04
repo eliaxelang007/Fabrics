@@ -1,9 +1,11 @@
+import 'package:flutter/material.dart';
+
+import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:google_fonts/google_fonts.dart';
+
+import 'package:fabrics/pages/menu/menu.dart';
 import 'package:fabrics/pages/1/intro.dart';
 import 'package:fabrics/pages/1/test.dart';
-import 'package:fabrics/pages/menu/menu.dart';
-import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
-import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 class App extends StatelessWidget {
   const App({Key? key}) : super(key: key);
@@ -23,8 +25,8 @@ class App extends StatelessWidget {
       onSecondary: Color(0xff38353a),
       error: Color(0xffb00020),
       onError: Colors.white,
-      background: Colors.black,
-      onBackground: Colors.white,
+      background: Colors.white,
+      onBackground: Colors.black,
       surface: Colors.white,
       onSurface: Colors.black,
     );
