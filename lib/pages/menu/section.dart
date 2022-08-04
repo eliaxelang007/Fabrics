@@ -59,8 +59,8 @@ class Section extends StatelessWidget {
           child: ColoredBackground(
             color: colorScheme.primary,
             child: FlexPadded(
-              horizontal: 10,
-              vertical: 90,
+              childHorizontal: 10,
+              childVertical: 90,
               child: DefaultTextStyle(
                 style: descriptionStyle.copyWith(
                   color: colorScheme.onPrimary,

@@ -3,13 +3,14 @@ import 'package:flutter/material.dart';
 class Debug extends StatelessWidget {
   final Widget child;
   final Color color;
+  final double width;
 
-  const Debug({required this.child, this.color = Colors.black, Key? key}) : super(key: key);
+  const Debug({required this.child, this.color = Colors.black, this.width = 10, Key? key}) : super(key: key);
 
   @override
-  Widget build(BuildContext context) => Container(
+  Widget build(BuildContext context) => DecoratedBox(
         decoration: BoxDecoration(
-          border: Border.all(color: color, width: 10),
+          border: Border.all(color: color, width: width),
         ),
         child: child,
       );

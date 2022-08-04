@@ -38,7 +38,11 @@ class App extends StatelessWidget {
           textTheme: GoogleFonts.quicksandTextTheme(TextTheme(headline3: headline3!.copyWith(color: colorScheme.onSecondary))),
         ),
         initialRoute: '/menu',
-        routes: {'/menu': (_) => const Menu(), '/1': (_) => const Intro(), '/1/test': (_) => const Test()},
+        routes: {
+          '/menu': (_) => const Menu(),
+          '/1': (_) => const Intro(),
+          '/1/test': (_) => const Test(),
+        },
       ),
     );
   }

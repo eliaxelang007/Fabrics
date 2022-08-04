@@ -30,7 +30,7 @@ class Menu extends StatelessWidget {
     final subtitleStyle = textTheme.headline6!;
 
     const sections = [
-      _Section(icon: Icons.checkroom_outlined, title: "Fabrics, Fibres, & Weaves", maxLines: 4),
+      _Section(icon: Icons.dry_cleaning_outlined, title: "Fabrics, Fibres, & Weaves", maxLines: 4),
       _Section(icon: Icons.cleaning_services_outlined, title: "Stain Removal", maxLines: 2),
       _Section(icon: Icons.sanitizer_outlined, title: "Detergents", maxLines: 1),
       _Section(icon: Icons.local_laundry_service, title: "Washers & Dryers", maxLines: 3),
@@ -111,10 +111,10 @@ class Menu extends StatelessWidget {
     );
 
     return Scaffold(
-      body: FlexPadded(
-        horizontal: (landscape) ? 120 : 50,
-        vertical: 90,
-        verticalPadding: (landscape) ? 0 : 1,
+      body: FlexPadded.symmetrical(
+        childHorizontal: (landscape) ? 120 : 50,
+        childVertical: 90,
+        vertical: (landscape) ? 0 : 1,
         child: child,
       ),
     );

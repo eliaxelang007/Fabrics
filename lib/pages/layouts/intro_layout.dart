@@ -1,9 +1,9 @@
-import 'package:fabrics/utilities/colored_background.dart';
 import 'package:flutter/material.dart';
 
 import 'package:auto_size_text/auto_size_text.dart';
 
 import 'package:fabrics/utilities/flex_padded.dart';
+import 'package:fabrics/utilities/colored_background.dart';
 
 class IntroLayout extends StatelessWidget {
   final Widget title;
@@ -27,13 +27,13 @@ class IntroLayout extends StatelessWidget {
     return Scaffold(
       backgroundColor: colorScheme.primary,
       body: FlexPadded(
-        horizontal: (landscape) ? 4 : 14,
-        vertical: (landscape) ? 5 : 28,
+        childHorizontal: (landscape) ? 4 : 14,
+        childVertical: (landscape) ? 5 : 28,
         child: ColoredBackground(
           color: colorScheme.background,
           child: FlexPadded(
-            vertical: (landscape) ? 5 : 16,
-            horizontal: (landscape) ? 3 : 10,
+            childHorizontal: (landscape) ? 5 : 16,
+            childVertical: (landscape) ? 3 : 10,
             child: Column(
               children: [
                 Expanded(
