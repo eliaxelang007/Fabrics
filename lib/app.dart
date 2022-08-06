@@ -1,3 +1,5 @@
+import 'package:fabrics/pages/2/intro.dart';
+import 'package:fabrics/pages/2/test.dart';
 import 'package:flutter/material.dart';
 
 import 'package:hooks_riverpod/hooks_riverpod.dart';
@@ -6,6 +8,8 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:fabrics/pages/menu/menu.dart';
 import 'package:fabrics/pages/1/intro.dart';
 import 'package:fabrics/pages/1/test.dart';
+
+import 'package:fabrics/observers.dart';
 
 class App extends StatelessWidget {
   const App({Key? key}) : super(key: key);
@@ -37,12 +41,15 @@ class App extends StatelessWidget {
           colorScheme: colorScheme,
           textTheme: GoogleFonts.quicksandTextTheme(TextTheme(headline3: headline3!.copyWith(color: colorScheme.onSecondary))),
         ),
-        initialRoute: '/menu',
+        initialRoute: '/',
         routes: {
-          '/menu': (_) => const Menu(),
+          '/': (_) => const Menu(),
           '/1': (_) => const Intro(),
           '/1/test': (_) => const Test(),
+          '/2': (_) => const Intro2(),
+          '/2/test': (_) => const Test2()
         },
+        navigatorObservers: [routeObserver],
       ),
     );
   }

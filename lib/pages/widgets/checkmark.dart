@@ -1,3 +1,4 @@
+import 'package:fabrics/pages/widgets/circle.dart';
 import 'package:flutter/material.dart';
 
 class Checkmark extends StatelessWidget {
@@ -12,21 +13,11 @@ class Checkmark extends StatelessWidget {
   Widget build(BuildContext context) {
     final colorScheme = Theme.of(context).colorScheme;
 
-    return DecoratedBox(
-      decoration: BoxDecoration(
-        color: background ?? colorScheme.primary,
-        border: Border.all(color: border ?? colorScheme.onPrimary, width: thickness),
-        shape: BoxShape.circle,
-      ),
-      child: FittedBox(
-        fit: BoxFit.contain,
-        child: Padding(
-          padding: const EdgeInsets.all(4.0),
-          child: Icon(
-            (check) ? Icons.check_outlined : Icons.close_outlined,
-            color: colorScheme.onPrimary,
-          ),
-        ),
+    return Circle(
+      decoration: BoxDecoration(color: colorScheme.primary, border: Border.all(color: colorScheme.onPrimary, width: 3.0)),
+      child: Icon(
+        (check) ? Icons.check_outlined : Icons.close_outlined,
+        color: colorScheme.onPrimary,
       ),
     );
   }

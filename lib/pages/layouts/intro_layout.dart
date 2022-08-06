@@ -71,7 +71,7 @@ class IntroLayout extends StatelessWidget {
                       child: AutoSizeText(
                         "Press BEGIN when you're ready to start.",
                         textAlign: TextAlign.center,
-                        style: descriptionStyle.copyWith(color: colorScheme.primary),
+                        style: descriptionStyle.copyWith(color: colorScheme.primary, fontStyle: FontStyle.italic),
                       ),
                     ),
                   ),

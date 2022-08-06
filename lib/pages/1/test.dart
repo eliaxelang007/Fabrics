@@ -1,21 +1,27 @@
 import 'dart:async';
 import 'dart:math';
 
-import 'package:fabrics/pages/1/results.dart';
+import 'package:fabrics/observers.dart';
+import 'package:fabrics/pages/hooks/use_routes.dart';
 import 'package:flutter/material.dart';
 
-import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:flutter_hooks/flutter_hooks.dart';
 
 import 'package:fabrics/utilities/colored_background.dart';
 
-import 'package:fabrics/models/tests/question.dart';
 import 'package:fabrics/providers/test_provider.dart';
+import 'package:fabrics/models/tests/question.dart';
 
-import 'package:fabrics/pages/1/models/fabric.dart';
 import 'package:fabrics/pages/1/models/fabric_type.dart';
+import 'package:fabrics/pages/1/models/fabric.dart';
+import 'package:fabrics/pages/1/results.dart';
+
 import 'package:fabrics/pages/widgets/checkmark.dart';
+
+final _nextRequestProvider = StateProvider<Timer?>((_) => null);
+final _completeProvider = StateProvider((_) => false);
 
 final testProvider = ChangeNotifierProvider(
   (_) => TestProvider(
@@ -39,22 +45,22 @@ class Test extends HookConsumerWidget {
 
     final complete = ref.watch(_completeProvider);
 
-    useEffect(
-      () {
-        if (!complete) return;
+    useEffect(() {
+      if (!complete) return;
 
-        WidgetsBinding.instance.addPostFrameCallback(
-          (_) {
-            Navigator.push<void>(
-              context,
-              MaterialPageRoute<void>(
-                builder: (BuildContext context) => const Results(),
-              ),
-            );
-          },
-        );
-      },
-    );
+      WidgetsBinding.instance.addPostFrameCallback(
+        (_) {
+          Navigator.push(
+            context,
+            MaterialPageRoute<void>(
+              builder: (BuildContext context) => const Results(),
+            ),
+          );
+        },
+      );
+    }, [complete]);
+
+    useRoutes(routeObserver, onPop: () {});
 
     return Scaffold(
       backgroundColor: colorScheme.primary,
@@ -63,10 +69,20 @@ class Test extends HookConsumerWidget {
           Expanded(
             child: ColoredBackground(
               color: colorScheme.background,
-              child: Center(
-                child: _Fabric(
-                  fabric: fabric,
-                ),
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  _Fabric(
+                    fabric: fabric,
+                  ),
+                  const SizedBox(
+                    height: 20,
+                  ),
+                  Text(
+                    "Drag the fibre to the correct box.",
+                    style: TextStyle(color: colorScheme.primary, fontStyle: FontStyle.italic, fontSize: (landscape) ? 20 : 14),
+                  )
+                ],
               ),
             ),
           ),
@@ -165,16 +181,6 @@ class _FabricType extends HookConsumerWidget {
                   child: Stack(
                     clipBehavior: Clip.none,
                     children: [
-                      if (correct != null)
-                        Positioned(
-                          top: -(checkmarkSize * 0.4),
-                          right: -(checkmarkSize * 0.4),
-                          child: SizedBox(
-                            width: checkmarkSize,
-                            height: checkmarkSize,
-                            child: Checkmark(correct),
-                          ),
-                        ),
                       Positioned.fill(
                         child: Padding(
                           padding: const EdgeInsets.all(12),
@@ -187,6 +193,16 @@ class _FabricType extends HookConsumerWidget {
                           ),
                         ),
                       ),
+                      if (correct != null)
+                        Positioned(
+                          top: -(checkmarkSize * 0.4),
+                          right: -(checkmarkSize * 0.4),
+                          child: SizedBox(
+                            width: checkmarkSize,
+                            height: checkmarkSize,
+                            child: Checkmark(correct),
+                          ),
+                        ),
                     ],
                   ),
                 ),
@@ -254,6 +270,3 @@ extension on FabricType {
     }
   }
 }
-
-final _nextRequestProvider = StateProvider<Timer?>((_) => null);
-final _completeProvider = StateProvider((_) => false);

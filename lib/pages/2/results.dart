@@ -1,23 +1,23 @@
-import 'package:fabrics/pages/1/test.dart';
+import 'package:fabrics/pages/2/test.dart';
 import 'package:fabrics/pages/layouts/results_layout.dart';
 import 'package:flutter/material.dart' hide Feedback;
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
-class Results extends ConsumerWidget {
-  const Results({Key? key}) : super(key: key);
+class Results2 extends ConsumerWidget {
+  const Results2({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final test = ref.read(testProvider);
 
     final description = [
-      "If we understand where fabrics originate, we can choose the best-suited laundering and stain removal processes.",
-      "We'll go into detail about stain removal methods in the next module."
+      "If we understand the most appropriate methods for treating a stain, we can remove it as effectively as possible without damaging the fabric.",
+      "In the next module, we'll explore how detergents can help us with the stain removal process."
     ].join('\n\n');
 
-    final almostGradeDescription = ["It seems that you know the source of your fabrics.", description].join('\n\n');
+    final almostGradeDescription = ["Good job, you know how to treat a stain.", description].join('\n\n');
 
-    const icon = Icon(Icons.cleaning_services_outlined);
+    const icon = Icon(Icons.sanitizer_outlined);
 
     return ResultsLayout(
       grade: test.grade,
@@ -33,7 +33,7 @@ class Results extends ConsumerWidget {
       ),
       tryAgain: Feedback(
         title: "Try again",
-        description: ["Looks like you'll have to review fabrics and their types.", description].join('\n\n'),
+        description: ["Looks like you'll have to review stains and how to remove them.", description].join('\n\n'),
         info: icon,
       ),
     );

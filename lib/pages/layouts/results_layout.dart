@@ -59,7 +59,7 @@ class ResultsLayout extends StatelessWidget {
               direction: (landscape) ? Axis.horizontal : Axis.vertical,
               children: [
                 Expanded(
-                  flex: (landscape) ? 9 : 29,
+                  flex: (landscape) ? 9 : 35,
                   child: FlexPadded(
                     top: 0,
                     left: 0,
@@ -87,12 +87,26 @@ class ResultsLayout extends StatelessWidget {
                         Expanded(
                           flex: 5,
                           child: AutoSizeText(
+                            overflow: TextOverflow.visible,
                             feedback.description,
                             style: descriptionStyle,
                           ),
                         ),
                         const Spacer(),
-                      ].toList(),
+                        Expanded(
+                          flex: 2,
+                          child: Align(
+                            alignment: Alignment.centerLeft,
+                            child: ElevatedButton(
+                              onPressed: () {
+                                Navigator.popUntil(context, (Route<dynamic> route) => route.isFirst);
+                              },
+                              child: Text("BACK TO MENU", style: descriptionStyle.copyWith(color: colorScheme.onPrimary)),
+                            ),
+                          ),
+                        ),
+                        const Spacer(),
+                      ],
                     ),
                   ),
                 ),
