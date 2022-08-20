@@ -40,7 +40,7 @@ class ResultsLayout extends StatelessWidget {
     final titleStyle = textTheme.headline3!;
     final descriptionStyle = textTheme.headline6!;
 
-    final checked = (grade >= 0.79);
+    final checked = (grade >= 0.85);
     final feedback = (grade >= 1.00) ? perfect : ((checked) ? almost : tryAgain);
 
     final landscape = MediaQuery.of(context).orientation == Orientation.landscape;

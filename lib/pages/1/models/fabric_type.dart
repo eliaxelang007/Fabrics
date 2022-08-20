@@ -1,7 +1,6 @@
-import 'package:fabrics/models/tests/equatable.dart';
 import 'package:handy/handy.dart';
 
-enum FabricType implements Equatable {
+enum FabricType {
   natural,
   manMade,
   mineral;

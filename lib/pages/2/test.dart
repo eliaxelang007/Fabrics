@@ -59,7 +59,7 @@ class Test2 extends HookConsumerWidget {
     final landscape = MediaQuery.of(context).orientation == Orientation.landscape;
 
     final stainWidget = Column(mainAxisAlignment: MainAxisAlignment.center, children: [
-      _Stain(stain),
+      _Stain(stain.prompt),
       const SizedBox(height: 5),
       Text(
         "Drag the stain to the correct box.",

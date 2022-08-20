@@ -1,11 +1,15 @@
 import 'package:fabrics/pages/2/intro.dart';
 import 'package:fabrics/pages/2/test.dart';
+import 'package:fabrics/pages/3/intro.dart';
+import 'package:fabrics/pages/3/test.dart';
+import 'package:fabrics/pages/4/intro.dart';
+import 'package:fabrics/pages/4/test.dart';
 import 'package:flutter/material.dart';
 
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-import 'package:fabrics/pages/menu/menu.dart';
+import 'package:fabrics/pages/menu.dart';
 import 'package:fabrics/pages/1/intro.dart';
 import 'package:fabrics/pages/1/test.dart';
 
@@ -25,7 +29,7 @@ class App extends StatelessWidget {
       primary: Color(0xff00779a),
       primaryContainer: Color(0xff52abc3),
       onPrimary: Colors.white,
-      secondary: Color(0xff88D498),
+      secondary: Color(0xffeee5ce),
       onSecondary: Color(0xff38353a),
       error: Color(0xffb00020),
       onError: Colors.white,
@@ -47,7 +51,11 @@ class App extends StatelessWidget {
           '/1': (_) => const Intro(),
           '/1/test': (_) => const Test(),
           '/2': (_) => const Intro2(),
-          '/2/test': (_) => const Test2()
+          '/2/test': (_) => const Test2(),
+          '/3': (_) => const Intro3(),
+          '/3/test': (_) => const Test3(),
+          '/4': (_) => const Intro4(),
+          '/4/test': (_) => const Test4()
         },
         navigatorObservers: [routeObserver],
       ),

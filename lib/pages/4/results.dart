@@ -1,21 +1,21 @@
-import 'package:fabrics/pages/3/test.dart';
+import 'package:fabrics/pages/4/test.dart';
 import 'package:fabrics/pages/layouts/results_layout.dart';
 import 'package:flutter/material.dart' hide Feedback;
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
-class Results3 extends ConsumerWidget {
-  const Results3({Key? key}) : super(key: key);
+class Results4 extends ConsumerWidget {
+  const Results4({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final test = ref.read(testProvider);
 
     final description = [
-      "Using the right types of detergent, we can effectively clean the different types of clothing our customer bring us.",
-      "We'll explore how we can use washers and dryers to effectively launder clothes in the next module."
+      "If we don't separate our laundry basket using the right properties, we could cause damage to the clothing.",
+      "After this module, we'll quiz you on all the concepts you've learned so far."
     ].join('\n\n');
 
-    final almostGradeDescription = ["Keep it up, you understand how to use detergents to treat a clothing.", description].join('\n\n');
+    final almostGradeDescription = ["You've chosen the right fabric properties to separate your laundry basket by.", description].join('\n\n');
 
     const icon = Icon(Icons.sanitizer_outlined);
 
@@ -33,7 +33,8 @@ class Results3 extends ConsumerWidget {
       ),
       tryAgain: Feedback(
         title: "Try again",
-        description: ["Looks like you'll have to review detergents and how they affect clothing.", description].join('\n\n'),
+        description:
+            ["Looks like you'll have to review washers & dryers and how to use them to properly launder clothing.", description].join('\n\n'),
         info: icon,
       ),
     );

@@ -1,7 +1,6 @@
-import 'package:fabrics/models/tests/equatable.dart';
 import 'package:handy/handy.dart';
 
-enum StainRemover implements Equatable {
+enum StainRemover {
   sponging,
   brushing,
   preSoaking,

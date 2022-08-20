@@ -25,7 +25,8 @@ class Menu extends StatelessWidget {
       _SectionData(icon: Icons.dry_cleaning_outlined, title: "Fabrics, Fibres, & Weaves", maxLines: 4),
       _SectionData(icon: Icons.cleaning_services_outlined, title: "Stain Removal", maxLines: 2),
       _SectionData(icon: Icons.sanitizer_outlined, title: "Detergents", maxLines: 1),
-      _SectionData(icon: Icons.local_laundry_service, title: "Washers & Dryers", maxLines: 3),
+      _SectionData(icon: Icons.local_laundry_service_outlined, title: "Washers & Dryers", maxLines: 3),
+      _SectionData(icon: Icons.quiz_outlined, title: "Final Exam", maxLines: 3),
     ];
 
     final child = Column(

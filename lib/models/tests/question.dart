@@ -1,8 +1,6 @@
-import 'package:fabrics/models/tests/equatable.dart';
-
-class Question<A extends Equatable, P> {
+class Question<A, P> {
   final A answer;
   final P prompt;
 
-  Question({required this.prompt, required this.answer});
+  const Question({required this.prompt, required this.answer});
 }

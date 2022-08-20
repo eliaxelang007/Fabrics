@@ -1,8 +1,6 @@
 import 'dart:async';
 import 'dart:math';
 
-import 'package:fabrics/observers.dart';
-import 'package:fabrics/pages/hooks/use_routes.dart';
 import 'package:flutter/material.dart';
 
 import 'package:auto_size_text/auto_size_text.dart';
@@ -60,8 +58,6 @@ class Test extends HookConsumerWidget {
       );
     }, [complete]);
 
-    useRoutes(routeObserver, onPop: () {});
-
     return Scaffold(
       backgroundColor: colorScheme.primary,
       body: Column(
@@ -73,7 +69,7 @@ class Test extends HookConsumerWidget {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   _Fabric(
-                    fabric: fabric,
+                    fabric: fabric.prompt,
                   ),
                   const SizedBox(
                     height: 20,
