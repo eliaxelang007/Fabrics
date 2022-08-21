@@ -28,8 +28,8 @@ import 'package:ordered_set/ordered_set.dart';
 final _nextRequestProvider = StateProvider<Timer?>((_) => null);
 final _completeProvider = StateProvider((_) => false);
 
-final _separateByProvider = ChangeNotifierProvider((_) => SetProvider<ClothProperty>(OrderedSet()));
-final _dontSeparateByProvider = ChangeNotifierProvider((_) => SetProvider<ClothProperty>(OrderedSet()));
+final _separateByProvider = ChangeNotifierProvider((_) => SetProvider<ClothProperty>(OrderedSet((a, b) => a == b ? 0 : 1)));
+final _dontSeparateByProvider = ChangeNotifierProvider((_) => SetProvider<ClothProperty>(OrderedSet((a, b) => a == b ? 0 : 1)));
 
 final testProvider = ChangeNotifierProvider(
   (ref) {

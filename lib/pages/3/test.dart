@@ -31,7 +31,7 @@ final testProvider = ChangeNotifierProvider(
   ),
 );
 
-final inWashingMachineProvider = ChangeNotifierProvider((_) => SetProvider<Detergent>(OrderedSet()));
+final inWashingMachineProvider = ChangeNotifierProvider((_) => SetProvider<Detergent>(OrderedSet((a, b) => a == b ? 0 : 1)));
 
 class Test3 extends HookConsumerWidget {
   const Test3({Key? key}) : super(key: key);
