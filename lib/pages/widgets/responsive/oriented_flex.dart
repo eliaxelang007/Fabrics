@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+import 'package:fabrics/pages/widgets/responsive/axis_extension.dart';
+
 class OrientedFlex extends StatelessWidget {
   final Axis landscapeOrientation;
   final MainAxisAlignment mainAxisAlignment;
@@ -9,6 +11,7 @@ class OrientedFlex extends StatelessWidget {
   final VerticalDirection verticalDirection;
   final TextBaseline? textBaseline;
   final Clip clipBehavior;
+  final List<Widget> children;
 
   const OrientedFlex({
     this.landscapeOrientation = Axis.horizontal,
@@ -19,27 +22,20 @@ class OrientedFlex extends StatelessWidget {
     this.verticalDirection = VerticalDirection.down,
     this.textBaseline,
     this.clipBehavior = Clip.none,
-    List<Widget> children = const <Widget>[],
+    this.children = const <Widget>[],
     Key? key,
   }) : super(key: key);
 
   @override
-  Widget build(BuildContext context) {
-    final orientation = MediaQuery.of(context).orientation;
-
-    return Flex(
-      direction: (orientation == Orientation.landscape) ? landscapeOrientation : landscapeOrientation.opposite,
-      mainAxisAlignment: mainAxisAlignment,
-      mainAxisSize: mainAxisSize,
-      crossAxisAlignment: crossAxisAlignment,
-      textDirection: textDirection,
-      verticalDirection: verticalDirection,
-      textBaseline: textBaseline,
-      clipBehavior: clipBehavior,
-    );
-  }
-}
-
-extension on Axis {
-  Axis get opposite => this == Axis.horizontal ? Axis.vertical : Axis.horizontal;
+  Widget build(BuildContext context) => Flex(
+        direction: (MediaQuery.of(context).orientation == Orientation.landscape) ? landscapeOrientation : landscapeOrientation.opposite,
+        mainAxisAlignment: mainAxisAlignment,
+        mainAxisSize: mainAxisSize,
+        crossAxisAlignment: crossAxisAlignment,
+        textDirection: textDirection,
+        verticalDirection: verticalDirection,
+        textBaseline: textBaseline,
+        clipBehavior: clipBehavior,
+        children: children,
+      );
 }
