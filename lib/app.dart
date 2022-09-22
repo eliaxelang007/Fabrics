@@ -1,19 +1,17 @@
+import 'package:fabrics/observers.dart';
+import 'package:fabrics/pages/1/intro.dart';
+import 'package:fabrics/pages/1/test.dart';
 import 'package:fabrics/pages/2/intro.dart';
 import 'package:fabrics/pages/2/test.dart';
 import 'package:fabrics/pages/3/intro.dart';
 import 'package:fabrics/pages/3/test.dart';
 import 'package:fabrics/pages/4/intro.dart';
 import 'package:fabrics/pages/4/test.dart';
-import 'package:flutter/material.dart';
-
-import 'package:hooks_riverpod/hooks_riverpod.dart';
-import 'package:google_fonts/google_fonts.dart';
-
 import 'package:fabrics/pages/menu.dart';
-import 'package:fabrics/pages/1/intro.dart';
-import 'package:fabrics/pages/1/test.dart';
-
-import 'package:fabrics/observers.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:google_fonts/google_fonts.dart';
+import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 class App extends StatelessWidget {
   const App({Key? key}) : super(key: key);
@@ -47,16 +45,27 @@ class App extends StatelessWidget {
         ),
         initialRoute: '/',
         routes: {
-          '/': (_) => const Menu(),
-          '/1': (_) => const Intro(),
-          '/1/test': (_) => const Test(),
-          '/2': (_) => const Intro2(),
-          '/2/test': (_) => const Test2(),
-          '/3': (_) => const Intro3(),
-          '/3/test': (_) => const Test3(),
-          '/4': (_) => const Intro4(),
-          '/4/test': (_) => const Test4()
-        },
+          '/': const Menu(),
+          '/1': const Intro(),
+          '/1/test': const Test(),
+          '/2': const Intro2(),
+          '/2/test': const Test2(),
+          '/3': const Intro3(),
+          '/3/test': const Test3(),
+          '/4': const Intro4(),
+          '/4/test': const Test4()
+        }.map(
+          (String route, Widget page) => MapEntry(
+            route,
+            (_) => Builder(builder: (context) {
+              final landscape = MediaQuery.of(context).orientation == Orientation.landscape;
+
+              ScreenUtil.init(context, designSize: (landscape) ? const Size(1536, 754) : const Size(393, 851));
+
+              return page;
+            }),
+          ),
+        ),
         navigatorObservers: [routeObserver],
       ),
     );

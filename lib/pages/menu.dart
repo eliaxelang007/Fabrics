@@ -1,11 +1,9 @@
-import 'package:flutter/material.dart';
-
 import 'package:auto_size_text/auto_size_text.dart';
-import 'package:handy/handy.dart';
-
 import 'package:fabrics/utilities/colored_background.dart';
-import 'package:fabrics/utilities/flex_padded.dart';
 import 'package:fabrics/utilities/fit.dart';
+import 'package:fabrics/utilities/flex_padded.dart';
+import 'package:flutter/material.dart';
+import 'package:handy/handy.dart';
 
 class Menu extends StatelessWidget {
   const Menu({Key? key}) : super(key: key);

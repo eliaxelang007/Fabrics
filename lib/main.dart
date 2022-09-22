@@ -1,9 +1,6 @@
+import 'package:fabrics/app.dart';
 import 'package:flutter/material.dart';
 
-import 'package:fabrics/app.dart';
-import 'package:flutter/rendering.dart';
-
-void main() {
-  //debugPaintSizeEnabled = true;
+void main() async {
   runApp(const App());
 }

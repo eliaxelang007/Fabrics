@@ -1,9 +1,9 @@
-import 'package:flutter/material.dart';
-
 import 'package:auto_size_text/auto_size_text.dart';
-
-import 'package:fabrics/utilities/flex_padded.dart';
 import 'package:fabrics/utilities/colored_background.dart';
+import 'package:fabrics/utilities/flex_padded.dart';
+import 'package:fabrics/utilities/fonts.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class IntroLayout extends StatelessWidget {
   final Widget title;
@@ -19,8 +19,8 @@ class IntroLayout extends StatelessWidget {
     final colorScheme = theme.colorScheme;
 
     final textTheme = theme.textTheme;
-    final titleStyle = textTheme.headline3!;
-    final descriptionStyle = textTheme.headline6!;
+    final titleStyle = textTheme.headline3!.responsive;
+    final descriptionStyle = textTheme.headline6!.responsive;
 
     final landscape = MediaQuery.of(context).orientation == Orientation.landscape;
 
@@ -79,8 +79,8 @@ class IntroLayout extends StatelessWidget {
                 Expanded(
                   child: Center(
                     child: SizedBox(
-                      width: 130,
-                      height: 45,
+                      width: 140.w,
+                      height: 45.h,
                       child: ElevatedButton(
                         onPressed: onBegin,
                         child: Text("BEGIN", style: descriptionStyle.copyWith(color: colorScheme.onPrimary)),
